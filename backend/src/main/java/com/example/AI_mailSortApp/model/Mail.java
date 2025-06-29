@@ -24,7 +24,7 @@ public class Mail {
     private Integer maxAge;
 
     @Column(name = "sent_at")
-    private Long sentAt;// UNIX時間
+    private long sentAt;// UNIX時間
 
     @Column(name = "contract_start_date")
     private Integer contractStartDate;
@@ -57,8 +57,12 @@ public class Mail {
     private String link;
 
     // デフォルトコンストラクタ（JPA用）
-    public Mail(long sentAt, String link) {
+    public Mail() {
+    }
+
+    public Mail(Long sentAt, String mainText, String link) {
         this.sentAt = sentAt;
+        this.mainText = mainText;
         this.link = link;
     }
 
@@ -104,11 +108,11 @@ public class Mail {
         this.maxAge = maxAge;
     }
 
-    public Long getSentAt() {
+    public long getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(Long sentAt) {
+    public void setSentAt(long sentAt) {
         this.sentAt = sentAt;
     }
 

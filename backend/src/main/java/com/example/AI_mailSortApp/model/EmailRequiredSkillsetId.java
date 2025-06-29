@@ -14,6 +14,9 @@ public class EmailRequiredSkillsetId implements Serializable {
     @Column(name = "skill_id")
     private Integer skillId;
 
+    public EmailRequiredSkillsetId() {
+    }
+
     public EmailRequiredSkillsetId(Integer mailId, Integer skillId) {
         this.mailId = mailId;
         this.skillId = skillId;

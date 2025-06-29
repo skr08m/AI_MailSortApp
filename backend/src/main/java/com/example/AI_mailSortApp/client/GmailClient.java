@@ -18,7 +18,7 @@ public class GmailClient {
     }
 
     // メッセージの一覧取得
-    public List<Message> listMessages(String userId, long lastFetchedTime) throws IOException {
+    public List<Message> getListMessages(String userId, long lastFetchedTime) throws IOException {
         return gmailService.users().messages()
                 .list(userId)
                 .setQ("after:" + lastFetchedTime) // 例: "after:1704067200" 2024-01-01 00:00:00 UTC

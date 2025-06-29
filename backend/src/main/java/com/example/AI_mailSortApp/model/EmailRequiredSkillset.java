@@ -12,7 +12,9 @@ public class EmailRequiredSkillset {
     @Enumerated(EnumType.STRING)
     @Column(name = "skill_require", nullable = false)
     private SkillRequire skillRequire;
-    
+
+    public EmailRequiredSkillset() {
+    }
 
     public EmailRequiredSkillset(EmailRequiredSkillsetId id, SkillRequire skillRequire) {
         this.id = id;

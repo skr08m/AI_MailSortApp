@@ -18,6 +18,9 @@ public class Company {
     private String managerName;
 
     // デフォルトコンストラクタ（JPA用）
+    public Company() {
+    }
+
     public Company(String companyName, String managerName) {
         this.companyName = companyName;
         this.managerName = managerName;
@@ -49,4 +52,3 @@ public class Company {
         this.managerName = managerName;
     }
 }
-
