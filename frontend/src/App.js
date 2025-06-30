@@ -42,12 +42,12 @@ export default function App() {
   /* ───────── Dummy Data ───────── */
   const [rows] = useState([
     {
-      name: "A案件", min: 60, max: 70, location: "東京都",
+      name: "【建設系】プロジェクトマネジメント支援案件のご案内 【キャリアビート 熊谷：39487885188】", min: 60, max: 70, location: "東京都",
       rate: 5, period: "202507", skills: ["C#", "Java", "MySQL"],
       flow: "2次請け", interview: 1, remote: "ハイブリッド", link: "#"
     },
     {
-      name: "B案件", min: 60, max: 90, location: "神奈川県",
+      name: "【面談設定済み★】java/要件定義/基本設計/常駐/外国籍可/個人事業主可 【キャリアビート 太田：39434935848】", min: 60, max: 90, location: "神奈川県",
       rate: 5, period: "202507", skills: ["AWS", "Linux"],
       flow: "2次請け", interview: 1, remote: "常駐", link: "#"
     },
@@ -146,7 +146,7 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container maxWidth="xll" sx={{ py: 4 }}>
         {/* 検索セクション */}
         <Paper 
           elevation={3} 
@@ -211,6 +211,21 @@ export default function App() {
                   }}
                 >
                   検索
+                </Button>
+              </Grid>
+                            <Grid item xs={6} md={2}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  sx={{ 
+                    borderRadius: 2,
+                    height: 56,
+                    background: 'linear-gradient(135deg,rgb(97, 212, 68) 0%,rgb(69, 192, 21) 100%)',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  自動マッチング
                 </Button>
               </Grid>
             </Grid>
@@ -397,7 +412,7 @@ export default function App() {
             background: 'linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%)'
           }}
         >
-          <Table sx={{ minWidth: 1200 }}>
+          <Table sx={{ minWidth: 1280 }}>
             <TableHead>
               <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
                 <TableCell sx={{ fontWeight: 'bold' }}>案件名</TableCell>
@@ -422,7 +437,7 @@ export default function App() {
                   }}
                 >
                   <TableCell>
-                    <Typography variant="body1" fontWeight="medium">
+                    <Typography variant="body1" fontWeight="small">
                       {row.name}
                     </Typography>
                   </TableCell>
@@ -484,7 +499,7 @@ export default function App() {
                         borderRadius: 2
                       }}
                     >
-                      応募する
+                      メールリンク
                     </Button>
                   </TableCell>
                 </TableRow>
