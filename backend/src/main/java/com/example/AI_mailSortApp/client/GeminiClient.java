@@ -20,7 +20,7 @@ public class GeminiClient {
 
     public String generateText(String prompt) throws IOException {
         GenerateContentResponse response = client.models.generateContent(
-                "gemini-2.5-flash-lite-preview-06-17", // このバージョンでの動作未確認
+                "gemini-2.5-flash-lite-preview-06-17", // このバージョンでの動作未確認_
                 prompt,
                 null);
         return response.text();
