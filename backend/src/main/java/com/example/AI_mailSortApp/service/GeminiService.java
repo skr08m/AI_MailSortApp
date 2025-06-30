@@ -15,6 +15,7 @@ public class GeminiService {
             "この中から以下の項目を抽出し、**JSON形式**で出力してください。\r\n" +
             "前置きはいいので、結果だけを出力してください。わからないなら、不明と記載してください。\r\n" +
             "出力はすべて文字列型とします。\r\n" +
+            "コードブロックやバッククォートで囲まずに、純粋な JSON 文字列のみ を返してください。\r\n" +
             "【抽出してほしい項目】\r\n" +
             "- メール内容（案件情報のメールか、要員情報のメールであるか。案件or要員のどちらかで出力してください）\r\n" +
             "- 案件名\r\n" +
@@ -37,7 +38,6 @@ public class GeminiService {
             "{ここに案件メール全文を貼る}\r\n" +
             "\r\n" +
             "【フォーマット例】\r\n" +
-            "```json\r\n" +
             "{\r\n" +
             "メール内容: \"案件\",\r\n" +
             "案件名: \"AWS基盤構築支援案件\",\r\n" +
@@ -54,8 +54,7 @@ public class GeminiService {
             "年齢制限: \"45\",\r\n" +
             "会社名: \"株式会社テックリンクス\",\r\n" +
             "担当者名: \"田中太郎\"\r\n" +
-            "}\r\n" +
-            "```";
+            "}\r\n";
 
     public GeminiService(GeminiClient geminiClient) {
         this.geminiClient = geminiClient;
@@ -67,7 +66,12 @@ public class GeminiService {
     }
 
     public SesMailData convertJsonToSesMailData(String json) throws IOException {
+        String cleanJson = json
+                .trim()
+                .replaceAll("^```json\\s*", "") // 先頭の ```json を削除
+                .replaceAll("^```", "") // もしくはただの ```
+                .replaceAll("```$", ""); // 末尾の ```
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, SesMailData.class);
+        return mapper.readValue(cleanJson, SesMailData.class);
     }
 }

@@ -26,7 +26,7 @@ public class GmailConfig {
 
     // GmailサービスのインスタンスをSpring Beanとして提供
     @Bean
-    public Gmail gmailService() throws Exception {
+    public Gmail gmailInitialSetup() throws Exception {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
         InputStream in = getClass().getResourceAsStream("/oAuth2.0Client.json");
@@ -43,9 +43,15 @@ public class GmailConfig {
                 .setAccessType("offline")
                 .build();
 
+        // ポート8080に固定し、リダイレクトパスを"/Callback"に指定
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder()
+                .setPort(8080)
+                .setCallbackPath("/Callback")
+                .build();
+
         // ユーザー認証のためのローカルサーバー立ち上げ（初回のみブラウザで認証が必要）
         return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY,
-                new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user"))
+                new AuthorizationCodeInstalledApp(flow, receiver).authorize("user"))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }

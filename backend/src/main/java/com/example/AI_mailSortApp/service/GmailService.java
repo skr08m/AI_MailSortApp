@@ -18,7 +18,19 @@ public class GmailService {
     }
 
     public List<Message> getMessagesAfter(String userId, long afterEpochSeconds) throws IOException {
-        return gmailClient.getListMessages(userId, afterEpochSeconds);
+        List<Message> messageStubs = gmailClient.getListMessages(userId, afterEpochSeconds);
+
+        if (messageStubs == null)
+            return List.of(); // ← nullチェックは必須
+
+        List<Message> fullMessages = new ArrayList<>();
+        for (Message stub : messageStubs) {
+            Message fullMessage = gmailClient.getMessage(userId, stub.getId());
+            if (fullMessage != null && fullMessage.getInternalDate() != null) {
+                fullMessages.add(fullMessage);
+            }
+        }
+        return fullMessages;
     }
 
     // メール本文（text/plain）を取得

@@ -60,9 +60,8 @@ public class Mail {
     public Mail() {
     }
 
-    public Mail(Long sentAt, String mainText, String link) {
+    public Mail(Long sentAt, String link) {
         this.sentAt = sentAt;
-        this.mainText = mainText;
         this.link = link;
     }
 

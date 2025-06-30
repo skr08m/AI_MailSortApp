@@ -22,15 +22,14 @@ public class MailService {
     }
 
     // MessageからsentAt, mainText, link情報を持ったMailリストを返す
-    public List<Mail> convertMessagesToMails(List<Message> messages, GmailService gmailService) {
+    public List<Mail> convertMessagesToMails(List<Message> messages) {
         List<Mail> mails = new ArrayList<>();
 
         for (Message message : messages) {
             long sentAt = message.getInternalDate();
-            String mainText = gmailService.getPlainTextBody(message);
             String link = "https://mail.google.com/mail/u/0/#inbox/" + message.getId();
 
-            mails.add(new Mail(sentAt, mainText, link));
+            mails.add(new Mail(sentAt, link));
         }
         return mails;
     }
